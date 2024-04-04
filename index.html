@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<p id="demoTekst"></p>
+
+<script>
+
+
+
+let Dobbelstenen = [];
+
+function Rollen() {
+
+    for (let i = 0; i < 5; i++) {
+        let willekeurig = Math.floor(Math.random() * 6) + 1;
+        Dobbelstenen.push(willekeurig);
+    }
+}
+
+function Is_Inclusief(Nummer) {
+    let aantal = 0;
+    for (let i = 0; i < Dobbelstenen.length; i++) {
+        if (Dobbelstenen[i] == Nummer) {
+            aantal++;
+        }
+    }
+    return aantal * Nummer;
+}
+
+function bonusScore() {
+    let totaleScore = 0;
+    if (totaleScore >= 63) {
+        totaleScore += 35;
+        alert(`Je hebt de Bonus bereikt: ${totaleScore}`);
+    }
+}
+
+
+function drieDezelfde(arr) {
+    const frequentie = {};
+    for (let i = 0; i < arr.length; i++) {
+        frequentie[arr[i]] = (frequentie[arr[i]] || 0) + 1;
+        if (frequentie[arr[i]] >= 3) {
+            return true; 
+        }
+    }
+    return false; 
+}
+
+function vierDezelfde(arr) {
+    const frequentie = {};
+    for (let i = 0; i < arr.length; i++) {
+        frequentie[arr[i]] = (frequentie[arr[i]] || 0) + 1;
+        if (frequentie[arr[i]] >= 4) {
+            return true; 
+        }
+    }
+    return false; 
+}
+
+// function groteStraat(arr) {
+//   arr.sort();   
+//   if (arr.value == [1, 2, 3, 4, 5] || arr.value == [2, 3, 4, 5, 6]) {
+//     return true;  
+//   } else {
+//     return false;
+//   }
+// }
+
+// function volHuis(arr) {
+// arr.sort();   
+// if (JSON.stringify(arr) === JSON.stringify([num1, num1, num2, num2, num2])) {
+//   return true;
+//     // Als je 2 dezelfde en 3 dezelfde hebt moet de functie true teruggeven, maar het werkt nog niet helemaal, hoe zou ik num1 & num2 variabel maken?  
+//   } else {
+//     return false;
+//   }
+// }
+
+function volHuis(arr, num1, num2) {
+    arr.sort();   
+    const counts = {};
+    for (let i = 0; i < arr.length; i++) {
+        counts[arr[i]] = (counts[arr[i]] || 0) + 1;
+    }
+    const values = Object.values(counts);
+    if (values.includes(2) && values.includes(3)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+// // Met deze functie wil true teruggeven als je een van deze combinaties hebt, maar op dit momement geeft die altijd false terug, zelfs als ik die waarde wel in een array heb. Gebruik ik de verkeerde benamingen?
+function kleineStraat(arr) {
+  arr.sort();   
+  if (JSON.stringify(arr) === JSON.stringify([1, 2, 3, 4]) || 
+      JSON.stringify(arr) === JSON.stringify([2, 3, 4, 5]) ||
+      JSON.stringify(arr) === JSON.stringify([3, 4, 5, 6])) {
+    return true;  
+  } else {
+    return false;
+  }
+}
+
+
+function groteStraat(arr) {
+  arr.sort();   
+  if (JSON.stringify(arr) === JSON.stringify([1, 2, 3, 4, 5]) || 
+      JSON.stringify(arr) === JSON.stringify([2, 3, 4, 5, 6])) {
+    return true;  
+  } else {
+    return false;
+  }
+}
+
+function kans(arr){
+let kansScore = 0;
+for (let i = 0; i < Dobbelstenen.length; i++) {
+  kansScore += arr[i];
+}
+return kansScore;
+  // Ik wil dat die de waarde van de array optelt
+}
+
+
+function Yahtzee(arr) {
+    let areEqual = true;
+
+    for (const element of array) {
+        if (element !== arr[0]) {
+            areEqual = false;
+            break;
+        }
+    }
+
+    return areEqual;
+}
+
+
+        Rollen();
+        console.log(Dobbelstenen);
+        console.log(`Je één Score is: ${Is_Inclusief(1)}`);
+        console.log(`Je twee Score is: ${Is_Inclusief(2)}`);
+        console.log(`Je drie Score is: ${Is_Inclusief(3)}`);
+        console.log(`Je vier Score is: ${Is_Inclusief(4)}`);
+        console.log(`Je vijf Score is: ${Is_Inclusief(5)}`);
+        console.log(`Je zes Score is: ${Is_Inclusief(6)}`);
+        bonusScore();
+
+        let testArray = [3, 3, 3, 1, 1];
+
+        console.log(`Heb je drie dezelfde? ${drieDezelfde(Dobbelstenen)}`);
+        console.log(`Heb je vier dezelfde? ${vierDezelfde(Dobbelstenen)}`);
+        console.log(`Heb je een vol huis? ${volHuis(Dobbelstenen)}`);
+        console.log(`Heb je kleine straat? ${kleineStraat(Dobbelstenen)}`);
+        console.log(`Heb je grote straat? ${groteStraat(Dobbelstenen)}`);
+        console.log(`Je kansScore = ${kans(Dobbelstenen)}`);
+       
+
+let demoTekst = document.getElementById("demoTekst");
+demoTekst.innerHTML = Dobbelstenen;
+</script>
+</body>
+</html>
